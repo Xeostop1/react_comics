@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 
-function Comics({ id, coverImg, title, year, summary, genres }){
+function Comics({ rank, id, coverImg, title, summary, genres }){
     return (
     <div>
         <img src={coverImg} alt={title}/>
         <h2><Link to={`/movie/${id}`}>{title}</Link></h2> 
-        <span>{year}</span>
+        <span>{rank}</span>
         <ul>
           {genres.map((g)=><li key={g}>{g}</li>)}
         </ul>
