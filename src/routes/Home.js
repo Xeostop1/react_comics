@@ -21,7 +21,7 @@ function Home() {
       const json=await(
         await fetch("https://api.jikan.moe/v4/manga")
       ).json();
-        console.log(json.data);  
+        // console.log(json.data);  
         setManga(json.data);
         //setMovies(json.data.movies);
         setLoading(false);
@@ -30,9 +30,20 @@ function Home() {
     useEffect(()=>{
       getMovies()},[]);
       
-      console.log(manga);
-      //console.log(movies);
-      //console.log(manga.map(it=>it));
+      //0102 정렬함수 추가 작동확인
+      function sortData(item){
+        item.sort((a,b)=>{
+          //인기순 오름차순
+          if(a.popularity>b.popularity) return 1;
+          if(a.popularity<b.popularity) return -1;
+          // 평점 내림차순
+          if(a.score>b.score) return -1;
+          if(a.score<b.score) return 1;
+        });
+        return item;
+      };
+      sortData(manga);
+      //console.log(manga);
     return (
       <div className="App">
         {loading? <h1>Loading....</h1>:
