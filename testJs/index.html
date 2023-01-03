@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sort exam</title>
+    <style>
+        .createLike {
+            width: 200px;
+            background-color: red;
+        }
+     .varDom{
+        /* display: flex;
+        flex-direction: row;
+        justify-content:  space-evenly;
+        width: 902px;
+        border: 1px solid blue; */
+        border: 1px solid blue;
+        width: 800px;
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        align-items: baseline;
+     }
+     .item_list{
+        width: 200px;
+        height: 150px;;
+        border: 1px solid red;
+        margin-bottom: 10px;
+     }
+    </style>
+</head>
+<body>
+    <h2></h2>
+    <h3></h3>
+    <div class="varDom"></div>
+    </br>좋아요 기능 만들기
+    <input type="checkbox" class="like" onclick="setEventClick()" value="${car.title}">
+    <p>여기에 추가된다</p>
+   
+</body>
+<script>
+    //미정렬 배열
+    const car=[
+    {polNum:80, title:"origin 1", num:8.2, like:false},
+    {polNum:20, title:"origin 2", num:4.2, like:true},
+    {polNum:10, title:"origin 3", num:4.2, like:true},
+    {polNum:1, title:"origin 4", num:2.2, like:true},
+    {polNum:3, title:"origin 5", num:9.2, like:true},
+    {polNum:87, title:"origin 6", num:3.2, like:true}
+    ]
+
+
+
+    //if로 걸어서 리턴값 1,-1로 보내주기 
+    car.sort((a,b)=>{
+        if(a.polNum>b.polNum) return 1;
+        if(a.polNum<b.polNum) return -1;
+
+        if(a.num>b.num) return -1;
+        if(a.num<b.num) return 1;
+    });
+
+    const dom=document.querySelector(".varDom");
+
+    //div 아이템 세팅 
+    function setItem(it) {
+        // let regex=/ /gi;
+        // let title=it.title.replace(regex, "");
+        //console.log(title);
+       return `
+                <div class="item_list">
+                    <a href="#">
+                        ${it.title}
+                    </a>
+                    <br/>인기순: ${it.polNum} 
+                    </br> 평점:${it.num} 
+                    <input 
+                        name="likeTitle"
+                        type="checkbox" 
+                        class="like"
+                        value="${it.title}"
+                        onclick="setEventClick('${it.title}')"
+                        on
+                        />
+                    <p></p>
+                    </br>
+                </div>
+                `;
+    }
+ 
+    //왜 되는지 모르겠는데 되는 join 메서드
+    const sortData=car.map((it)=>
+                setItem(it)).join(" ");
+                
+    dom.innerHTML=`${sortData}`
+    
+
+    const valueList=document.querySelectorAll("input[name='likeTitle']");
+    function setEventClick(it) {
+        //아이템 리스트 배열
+        const item_list=document.querySelectorAll(".item_list");
+        const likeTitle=[];
+        // ==체크박스 선택 값 배열에 넣기 익숙한 for으로 넣었음 
+        const value=event.target.value; 
+        // console.log(value);
+
+        for (let i = 0; i < valueList.length; i++) {
+               if(value===valueList[i].value ){
+                const valueClass=item_list[i].classList.toggle("createLike");
+               }
+               if(valueList[i].checked===true){
+                likeTitle.push(valueList[i].value);
+               // console.log(likeTitle);
+                }else{
+                    window.localStorage.removeItem(i);
+                }
+
+            }
+     //console.log(likeTitle);
+     const local=window.localStorage;
+     if(likeTitle.length>0){
+        for (let i = 0; i < likeTitle.length; i++) {
+            local.setItem(i, likeTitle[i]);        
+        }
+     }
+        
+     }
+     
+     
+
+        //=====베열은 안드어가는데 그냥 세팅은 가능함
+        // valueList.forEach((item, i) => {
+        //     const value=event.target.value;
+        //     const checked=valueList[i].value;
+        //     if(valueList[i].checked && value===checked){
+        //         const valueClass=item_list[i].classList.toggle("createLike");
+        //     }
+        // });
+            
+        //====forEach로 토글 세팅
+        // item_list.forEach((item,i)=>{
+        //     const value=event.target.value;
+        //     console.log("*****");
+        //     console.log(value);
+        //     console.log(valueList[i].checked.value);
+        //     if(value && item.ch){
+        //         const valueClass=item.classList.toggle("createLike");
+        //     }
+        // });
+    
+
+
+    
+
+    // const h3=document.querySelector("h3")
+    // car.sort((a,b)=>a.polNum-b.polNum);
+    // car.sort((a,b)=>b.num-a.num);
+    // h3.innerHTML=JSON.stringify(car);
+    // console.log(car);
+
+
+    // const h2=document.querySelector("h2");
+    // let arr=[98,33,11,56,3,4,2,1];
+    // arr.sort((a,b)=>a-b);
+    // h2.innerText=arr;
+    //되는것 확인! function 쓰고 하는버 
+    // const h3=document.querySelector("h3")
+    // arr.sort(function (a,b) {
+    //    return a-b;
+    //     })
+    // console.log(arr);
+    // h3.innerText=arr;
+
+
+
+        //========처음 세팅한 방법================
+        // const valueClass=item_list.classList;       //토글사용하기 위한 classList 읽기전용 엘리멘탈 가져오기
+        // //토글세팅 클래스명으로 토글 주기
+        // const valueToggle=valueClass.toggle("createLike");
+        // //console.log(valueToggle);
+        // //토글이 true라면 실행 3항연산자 실행
+        // itemInput.innerHTML=`${valueToggle ? 
+        //     value+"가 선택되었습니다" :"좋아요가 취소"}`
+        
+        // ==체크박스 선택 값 배열에 넣기
+        // const valueList=document.querySelectorAll("input[name='likeTitle']");
+        // const likeTitle=[];
+        // for (let i = 0; i < valueList.length; i++) {
+        //         if(valueList[i].checked===true){
+        //             likeTitle.push(valueList[i].value);
+        //             // console.log(likeTitle);
+        //         }
+        // }
+
+
+    
+</script>
+</html>
