@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sort exam</title>
+    <style>
+        .createLike {
+            width: 200px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <h2></h2>
+    <h3></h3>
+    <div class="varDom"></div>
+    </br>좋아요 기능 만들기
+    <input type="checkbox" class="like" onclick="setEventClick()" value="${car.title}">
+   
+</body>
+<script>
+    //미정렬 배열
+    const car=[
+    {polNum:80, title:"origin 1", num:8.2, like:false},
+    {polNum:20, title:"origin 2", num:4.2, like:true},
+    {polNum:10, title:"origin 3", num:4.2, like:true},
+    {polNum:1, title:"origin 4", num:2.2, like:true},
+    {polNum:3, title:"origin 5", num:9.2, like:true},
+    {polNum:87, title:"origin 6", num:3.2, like:true}
+    ]
+
+
+
+    //if로 걸어서 리턴값 1,-1로 보내주기 
+    car.sort((a,b)=>{
+    
+        if(a.polNum>b.polNum) return 1;
+        if(a.polNum<b.polNum) return -1;
+
+        if(a.num>b.num) return -1;
+        if(a.num<b.num) return 1;
+    });
+
+    const dom=document.querySelector(".varDom");
+
+    //div 아이템 세팅 
+    function setItem(it) {
+        // let regex=/ /gi;
+        // let title=it.title.replace(regex, "");
+        //console.log(title);
+       return `</br>
+                <div class="item_list">
+                <a href="#">
+                    ${it.title}
+                </a>
+                <br/>인기순: ${it.polNum} 
+                </br> 평점:${it.num} 
+                <input 
+                    type="checkbox" 
+                    class="like"
+                    value="${it.title}"
+                    onclick="setEventClick('${it.title}')"
+                    on
+                    />
+                </br>
+                </div>
+                `;
+    }
+ 
+    //왜 되는지 모르겠는데 되는 join 메서드
+    const sortData=car.map((it)=>
+                setItem(it)).join(" ");
+                
+    dom.innerHTML=`<div>${sortData}</div>`
+    
+    
+    function setEventClick(it) {
+        const item_list=document.querySelector(".item_list");
+        let checked=event.target.checked;
+        let value=event.target.value;
+        if(checked===true && value===it){
+            item_list.className="createLike";
+            console.log(it);
+            return false;
+        }else{
+            console.log("TTTTTT");
+            item_list.className="item_list";
+        }
+    }
+    
+    
+    
+
+    // const h3=document.querySelector("h3")
+    // car.sort((a,b)=>a.polNum-b.polNum);
+    // car.sort((a,b)=>b.num-a.num);
+    // h3.innerHTML=JSON.stringify(car);
+    // console.log(car);
+
+
+    // const h2=document.querySelector("h2");
+    // let arr=[98,33,11,56,3,4,2,1];
+    // arr.sort((a,b)=>a-b);
+    // h2.innerText=arr;
+    //되는것 확인! function 쓰고 하는버 
+    // const h3=document.querySelector("h3")
+    // arr.sort(function (a,b) {
+    //    return a-b;
+    //     })
+    // console.log(arr);
+    // h3.innerText=arr;
+</script>
+</html>
