@@ -44,17 +44,24 @@ function Home() {
       };
       sortData(manga);
       //console.log(manga);
+
+
     return (
       <div className="App">
         {loading? <h1>Loading....</h1>:
-        <div>{manga.map(it=>(
-          <div>
-            만화제목: {it.title}<br/>
-            {it.mal_id}<br/>
-            인기순위: {it.popularity}<br/>
-            평점: {it.score}
-            <img src={it.images.jpg.image_url}/>
-            <p>시놉시스:{it.synopsis}</p>
+        <div className='itemList'>
+          <h1>HOTMANGA RANKING</h1>
+          {manga.map(it=>(
+          <div className='itemManga'>
+          <img src={it.images.jpg.image_url}/>
+            <h2>{it.title}</h2>
+            {/* <span>{it.mal_id}</span> */}
+            <p className='p_ranking'>Ranking <span className='rankingNum'> {it.popularity} </span> 
+               / 평점: {it.score}</p>
+            <details>
+              <summary>시놉시스</summary>
+              <p>{it.synopsis}</p>
+            </details>
           </div>
         ))
         }</div>}

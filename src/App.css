@@ -1,38 +1,80 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.App{
+  background-color: #f4f4f4;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-items: center;
+  justify-items: center;
+  
+}
+.App h1{
+  /* border: 1px solid red; */
+  display: inline-block;
+  height: 100px;
+  padding-left: 198px;
+  padding-right: 199px;
+  margin-bottom: -50px;
+  color: rgb(88, 88, 88);
+}
+.itemList{
+  margin: auto;
+  display:  flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-items: center;
+  flex-wrap: wrap;
+  width: 840px;
+  padding-top: 20px;
+  margin-top: 30px;
+  border-radius: 10px;
+  background-color: white;
+  padding-left: 10px;
+  box-shadow: 4px 6px 3px rgba(0, 0, 0, 0.10);
+}
+.itemList h1{
+
 }
 
-.App-link {
-  color: #61dafb;
+.itemManga{
+  border-radius: 5px;
+   width: 350px;
+   margin-top: 22px;
+   margin-right: 19px;
+   text-align: center;
+   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.10), 0 1px 2px rgba(0,0,0,0.24);
+   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.itemManga:hover {
+  /* transform: scale(1.01); */
+  transition:0.8s;
+  box-shadow: 4px 6px 6px rgba(0, 0, 0, 0.20), 0 3px 6px rgba(0,0,0,0.23);
+}
+.itemManga:hover .rankingNum{
+  transition: 0.5s;
+  color: red;
+}
+
+.itemManga > img{
+  padding-top: 15px;
+  height: 318px;
+}
+
+.itemManga h2{
+  font-weight: bold;
+  margin-top: -1px;
+}
+
+.p_ranking{
+  font-weight: bold;
+  height: 25px;
+}
+.rankingNum{
+  font-weight: bold;
+  height: 25px;
+}
+summary{
+  margin-bottom: 15px;
+}
+details p{
+ text-align: justify;
+ padding-left: 20px;
+ padding-right: 20px;
 }
