@@ -1,22 +1,79 @@
 import { useEffect, useState } from 'react';
 //import Comics from '../components/Comics';
+ //셀렉트 옵션을 선택하는 배열
+ const sortOption=[
+  {value:"low", name:"low"},
+  {value:"high", name:"high"},
+]
+const seletOption=[
+  {value: "ranking", name:"ranking"},
+  {value: "score", name:"score"},
+]
+//====셀렉트 태그를 만들고, 선택한 값으로 옵션값 세팅 함수
+const ControlSelet=({value, onChange, options})=>{
+  return(
+    <select
+      className='selectMenu'
+      value={value}
+      onChange={e=> onChange(e.target.value)}
+      >
+        {options.map((it,i)=>(
+          <option key={i} value={it.value}>
+            {it.name}
+          </option>))
+        };  
+    </select>
+  );
+};
 
 
-// const getMovies=async()=>{
-//   const json=await(
-//     await fetch("https://yts.mx/api/v2/list_movies.json?minimum_rating=8.8&sort_by=year")
-//   ).json();
-//     setMovies(json.data.movies);
-//     setLoading(false);
-// }
-
-
+//=====Main====
 function Home() {
-
   //로딩을 보여주는 useState
-    const [loading, setLoading]=useState(true);
-    const [manga, setManga]=useState([]);
+  const [loading, setLoading]=useState(true);
+  //fetch에서 받아온 만화를 담은 배열
+  const [manga, setManga]=useState([]);
 
+  //정렬상태를 저장하는 
+  //sortType: low/high selectType: ranking, score
+  const [sortType, setSortType]=useState("high");
+  const [selectType, setSelectType]=useState("ranking");
+  
+
+
+
+  //변경 타입을 받아서 분기를 세팅하고 싶었으나 포기~~
+  const getFilterManaList=()=>{
+    const compare=(a,b)=>{
+      if(sortType==="high"){
+        return parseInt(a.popularity)-parseInt(b.popularity);
+      }else{
+        return parseInt(b.popularity)-parseInt(a.popularity);
+      }
+  };
+      //if에서 else if로 변경
+      // if(sortType=="high"){
+      //   //일단은 인기순만 정렬하자! 꼬였다!
+      //   return parseInt(a.popularity)-parseInt(b.popularity);
+      // }else{
+      //   return parseInt(b.popularity)-parseInt(a.popularity);
+      // }
+      // if(selectType==="ranking"){
+      //   return parseInt(a.score)-parseInt(b.score);
+      // }else{
+      //   return parseInt(b.score)-parseInt(b.score);
+      // }
+
+    //복사한 배열로 정렬하기
+    const copyList=JSON.parse(JSON.stringify(manga));
+    // const filteredList=type==="ranking" ? copyList: copyList.filter(it=>selectCallback(it));
+    const sortList=copyList.sort(compare);
+    return sortList;
+  }
+    
+   
+
+//===만화 API 가지고오는 함수
     const getMovies=async()=>{
       const json=await(
         await fetch("https://api.jikan.moe/v4/manga")
@@ -26,6 +83,8 @@ function Home() {
         //setMovies(json.data.movies);
         setLoading(false);
     }
+
+
   
     useEffect(()=>{
       getMovies()},[]);
@@ -45,13 +104,22 @@ function Home() {
       sortData(manga);
       //console.log(manga);
 
-
     return (
       <div className="App">
         {loading? <h1>Loading....</h1>:
         <div className='itemList'>
           <h1>HOTMANGA RANKING</h1>
-          {manga.map(it=>(
+          <ControlSelet
+            value={sortType}
+            onChange={setSortType}
+            options={sortOption}
+          />
+          {/* <ControlSelet
+            value={selectType}
+            onChange={setSelectType}
+            options={seletOption}
+          /> */}
+          {getFilterManaList().map(it=>(
           <div className='itemManga'>
           <img src={it.images.jpg.image_url}/>
             <h2>{it.title}</h2>
@@ -64,7 +132,8 @@ function Home() {
             </details>
           </div>
         ))
-        }</div>}
+        }
+        </div>}
       </div>
     );
   }

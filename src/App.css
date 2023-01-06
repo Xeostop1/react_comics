@@ -9,10 +9,28 @@
   /* border: 1px solid red; */
   display: inline-block;
   height: 100px;
-  padding-left: 198px;
-  padding-right: 199px;
+  padding-left: 66px;
+  padding-right: 29px;
   margin-bottom: -50px;
   color: rgb(88, 88, 88);
+}
+
+/* 셀렉트 */
+.selectMenu{
+  background-color: #f4f4f4;
+  border: none;
+  border-radius: 5px;
+  width: 100px;
+  height: 40px;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 17px;
+}
+.selectMenu:focus{
+  border: none;
+}
+.selectMenu option{
+  border: 1px solid red;
 }
 .itemList{
   margin: auto;
