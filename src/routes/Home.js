@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
+import { TranslatorProvider, useTranslate } from 'react-translate';
+import axios from 'axios';
 //import Comics from '../components/Comics';
- //셀렉트 옵션을 선택하는 배열
+
+ //======셀렉트 옵션을 선택하는 배열
  const sortOption=[
   {value:"low", name:"low"},
   {value:"high", name:"high"},
@@ -9,6 +12,25 @@ const seletOption=[
   {value: "ranking", name:"ranking"},
   {value: "score", name:"score"},
 ]
+
+//번역 더미
+let translations = {
+  locale: "en",
+  Home1: {
+    "HELLO": "Helloworld!"
+  }
+};
+
+//번역 함수
+function Home1() {
+  let t = useTranslate("Home1");
+  return <h1> {t("HELLO")} </h1>
+}
+
+
+
+
+
 //====셀렉트 태그를 만들고, 선택한 값으로 옵션값 세팅 함수
 const ControlSelet=({value, onChange, options})=>{
   return(
@@ -51,19 +73,6 @@ function Home() {
         return parseInt(b.popularity)-parseInt(a.popularity);
       }
   };
-      //if에서 else if로 변경
-      // if(sortType=="high"){
-      //   //일단은 인기순만 정렬하자! 꼬였다!
-      //   return parseInt(a.popularity)-parseInt(b.popularity);
-      // }else{
-      //   return parseInt(b.popularity)-parseInt(a.popularity);
-      // }
-      // if(selectType==="ranking"){
-      //   return parseInt(a.score)-parseInt(b.score);
-      // }else{
-      //   return parseInt(b.score)-parseInt(b.score);
-      // }
-
     //복사한 배열로 정렬하기
     const copyList=JSON.parse(JSON.stringify(manga));
     // const filteredList=type==="ranking" ? copyList: copyList.filter(it=>selectCallback(it));
@@ -71,21 +80,15 @@ function Home() {
     return sortList;
   }
     
-   
 
 //===만화 API 가지고오는 함수
     const getMovies=async()=>{
       const json=await(
         await fetch("https://api.jikan.moe/v4/manga")
-      ).json();
-        // console.log(json.data);  
-        setManga(json.data);
-        //setMovies(json.data.movies);
+      ).json(); // console.log(json.data);  
+        setManga(json.data);  //setMovies(json.data.movies);
         setLoading(false);
     }
-
-
-  
     useEffect(()=>{
       getMovies()},[]);
       
@@ -108,7 +111,10 @@ function Home() {
       <div className="App">
         {loading? <h1>Loading....</h1>:
         <div className='itemList'>
-          <h1>HOTMANGA RANKING</h1>
+            <TranslatorProvider translations={translations}>
+              <Home1 />
+            </TranslatorProvider>
+          <h1>HOT MANGA RANKING</h1>
           <ControlSelet
             value={sortType}
             onChange={setSortType}
@@ -121,15 +127,15 @@ function Home() {
           /> */}
           {getFilterManaList().map(it=>(
           <div className='itemManga'>
-          <img src={it.images.jpg.image_url}/>
-            <h2>{it.title}</h2>
-            {/* <span>{it.mal_id}</span> */}
-            <p className='p_ranking'>Ranking <span className='rankingNum'> {it.popularity} </span> 
-               / 평점: {it.score}</p>
-            <details>
-              <summary>시놉시스</summary>
-              <p>{it.synopsis}</p>
-            </details>
+            <img src={it.images.jpg.image_url}/>
+              <h2>{it.title}</h2>
+              {/* <span>{it.mal_id}</span> */}
+              <p className='p_ranking'>Ranking <span className='rankingNum'> {it.popularity} </span> 
+                / 평점: {it.score}</p>
+              <details>
+                <summary>시놉시스</summary>
+                <p>{it.synopsis}</p>
+              </details>
           </div>
         ))
         }
