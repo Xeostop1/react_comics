@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { TranslatorProvider, useTranslate } from 'react-translate';
-import axios from 'axios';
-//import Comics from '../components/Comics';
+// import { TranslatorProvider, useTranslate } from 'react-translate';
+//import axios from 'axios';
+import Convert from '../components/Convert';
 
  //======셀렉트 옵션을 선택하는 배열
  const sortOption=[
@@ -12,24 +12,6 @@ const seletOption=[
   {value: "ranking", name:"ranking"},
   {value: "score", name:"score"},
 ]
-
-//번역 더미
-let translations = {
-  locale: "en",
-  Home1: {
-    "HELLO": "Helloworld!"
-  }
-};
-
-//번역 함수
-function Home1() {
-  let t = useTranslate("Home1");
-  return <h1> {t("HELLO")} </h1>
-}
-
-
-
-
 
 //====셀렉트 태그를 만들고, 선택한 값으로 옵션값 세팅 함수
 const ControlSelet=({value, onChange, options})=>{
@@ -79,7 +61,6 @@ function Home() {
     const sortList=copyList.sort(compare);
     return sortList;
   }
-    
 
 //===만화 API 가지고오는 함수
     const getMovies=async()=>{
@@ -111,9 +92,6 @@ function Home() {
       <div className="App">
         {loading? <h1>Loading....</h1>:
         <div className='itemList'>
-            <TranslatorProvider translations={translations}>
-              <Home1 />
-            </TranslatorProvider>
           <h1>HOT MANGA RANKING</h1>
           <ControlSelet
             value={sortType}
@@ -134,7 +112,7 @@ function Home() {
                 / 평점: {it.score}</p>
               <details>
                 <summary>시놉시스</summary>
-                <p>{it.synopsis}</p>
+                <p><Convert text={it.synopsis} language="ko"/></p>
               </details>
           </div>
         ))
@@ -154,3 +132,5 @@ function Home() {
   //           genres={it.genres}
   //           rank={it.popularity}
   //         />
+
+  //{/* <p>{it.synopsis}</p> */}
