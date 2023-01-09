@@ -20,7 +20,7 @@ function Detail() {
     
     return (
         <div>
-    {loading ? <h1>Loading...</h1>:
+            {loading ? <h1>Loading...</h1>:
         <div className="detail">
            <img src={movie.medium_cover_image}/>
            <h2>{movie.title}</h2>
