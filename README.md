@@ -1,6 +1,6 @@
 
-<div align="center">
 # React ToyProject - "HOT MANGA RANKING"
+<div align="center">
   
   |MANGA Ranking| Open API및 Reat를 이용한 만화랭킹 사이트|
   |--|---|
@@ -11,12 +11,6 @@
   
   ![image](https://user-images.githubusercontent.com/97787658/211715700-7c9dad3e-fcef-4796-8e26-6a299e3a2ded.png)
   ![image](https://user-images.githubusercontent.com/97787658/211715796-097d946d-367a-4a2a-acda-963cb0ff6789.png)
-
-
-
-
-
-  
 </div>
 
 
