@@ -1,9 +1,12 @@
+/* ===font==== */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&family=Ubuntu&display=swap');
+
+
 .App{
-  background-color: #f4f4f4;
+  /* background-color: #f4f4f4; */
   display: flex;
   justify-items: center;
   justify-items: center;
-  
 }
 .App h1{
   /* border: 1px solid red; */
@@ -13,6 +16,7 @@
   padding-right: 29px;
   margin-bottom: -50px;
   color: rgb(88, 88, 88);
+  font-family: 'Ubuntu', sans-serif;
 }
 
 /* 셀렉트 */
@@ -47,7 +51,7 @@
 .itemList h1{
 
 }
-
+/* ======itemManga======= */
 .itemManga{
   border-radius: 5px;
    width: 350px;
@@ -56,25 +60,72 @@
    text-align: center;
    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.10), 0 1px 2px rgba(0,0,0,0.24);
    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+   font-family: 'Ubuntu', sans-serif;
+   overflow: hidden;
 }
 
 .itemManga:hover {
   /* transform: scale(1.01); */
-  transition:0.8s;
+  /* transition:0.8s; */
   box-shadow: 4px 6px 6px rgba(0, 0, 0, 0.20), 0 3px 6px rgba(0,0,0,0.23);
+
 }
+.p_ranking{
+  font-weight: bold;
+  height: 25px;
+  overflow: hidden;
+  
+  transform: scale(1.0);
+  -webkit-transform: scale(1.0);
+  -moz-transform: scale(1.0);
+  -ms-transform: scale(1.0); 
+  -o-transform: scale(1.0);
+
+  transition: transform 0.3s;
+}
+
+.rankingNum{
+  font-weight: bold;
+  height: 25px;
+  overflow: hidden 
+}
+
 .itemManga:hover .rankingNum{
-  transition: 0.5s;
   color: red;
+  font-size: 20px;
+
+  transform: scale(1.05);
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -ms-transform: scale(1.05); /* IE 9 */
+  -o-transform: scale(1.05);
+
+  transition: transform 0.3s;
+  /* border: 1px solid red; */
  }
  .itemManga:hover img{
-  transform: scale(1.01);  
-  transition:0.4s;
+  /* transform: scale(1.05);   */
+  /* transition:0.4s; */
+  /* 천천히 커지고 사라지는 효과 */
+  transform: scale(1.05);
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.2);
+  -ms-transform: scale(1.2); /* IE 9 */
+  -o-transform: scale(1.2);
+
+  transition: transform 0.3s;
 } 
 
 .itemManga > img{
   padding-top: 15px;
   height: 318px;
+  transform: scale(1.0);
+  -webkit-transform: scale(1.0);
+  -moz-transform: scale(1.0);
+  -ms-transform: scale(1.0); 
+  -o-transform: scale(1.0);
+
+  transition: transform 0.3s;
 }
 
 .itemManga h2{
@@ -82,14 +133,6 @@
   margin-top: -1px;
 }
 
-.p_ranking{
-  font-weight: bold;
-  height: 25px;
-}
-.rankingNum{
-  font-weight: bold;
-  height: 25px;
-}
 summary{
   margin-bottom: 15px;
 }
@@ -97,4 +140,5 @@ details p{
  text-align: justify;
  padding-left: 20px;
  padding-right: 20px;
+ font-family: 'Noto Sans KR', sans-serif;
 }
