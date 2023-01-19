@@ -30,7 +30,7 @@ const ControlSelet=({value, onChange, options})=>{
   );
 };
 
-
+//큰일났다!!!!!!!!!! EmotionDiary가 안돼 ㅠㅠㅠ 어떻게 
 //=====Main====
 function Home() {
   //로딩을 보여주는 useState
