@@ -25,7 +25,7 @@ const Convert = ({ text, language }) => {
           params: {
             q: text,
             target: language,
-            key: 'AIzaSyBpXjF6WItTpxRvaLXCFv-9TYe1SFZnX-U'
+            key: 'AIzaSyBpXjF6WItTpxRvaLXCFv-9TYe1SFZnX-U1'
           }
         }
       )
